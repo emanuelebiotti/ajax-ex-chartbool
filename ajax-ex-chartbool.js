@@ -43,6 +43,12 @@ function disegna_grafico_vendite_venditore(nomi, dati) {
           }],
        'labels': nomi
       },
+      'options': {
+        'title': {
+            'display': true,
+            'text': 'Fatturato per venditore - 2017'
+        }
+    }
   });
 }
 
