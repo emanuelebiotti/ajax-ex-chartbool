@@ -1,50 +1,30 @@
 $(document).ready(function(){
 
 
-
 $.ajax({
   url:'http://157.230.17.132:4003/sales',
   method: 'GET',
-  success: function(vendite){
+  success: function(response){
+    // console.log(response);
 
+    var vendite = {};
+    for (var i = 0; i < response.length; i++){
+      var vendita = response[i];
+      var venditore = vendita.salesman;
+      var importo = vendita.amount;
 
-    var ctx = $('#myChart');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'],
-            datasets: [{
-                label: 'Vendite totali',
-                data: [],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
+      var venditori_inseriti = Object.keys(vendite);
+      if (!venditori_inseriti.includes(venditore)) {
+        vendite[venditore] = importo;
+      } else {
+        vendite[venditore] += importo;
+      }
+    }
+
+    var label_venditori = Object.keys(vendite);
+    var dati_vendite_per_venditore = Object.values(vendite)
+
+    disegna_grafico_vendite_venditore(label_venditori, dati_vendite_per_venditore);
 
   },
   error: function(){
@@ -53,6 +33,18 @@ $.ajax({
 });
 
 
+function disegna_grafico_vendite_venditore(nomi, dati) {
 
+  var myPieChart = new Chart($('#grafico_venditori'), {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: dati,
+          }],
+       labels: nomi
+      },
+  });
+
+}
 
 });
