@@ -6,15 +6,6 @@ $.ajax({
   url:'http://157.230.17.132:4003/sales',
   method: 'GET',
   success: function(vendite){
-    console.log(vendite);
-    data = ['0', '0', '0', '0','0', '0', '0', '0','0', '0', '0', '0'] //qui vanno i dati di vendita di ogni mese
-
-    for (var i = 0; i<vendite.length; i++) {
-      var datavendita = moment(vendite[i].date).format('YYYY-MM-DD');
-      var mercevenduta = vendite[i].amount;
-      var mesevendita = moment(datavendita).month();
-
-    }
 
 
     var ctx = $('#myChart');
