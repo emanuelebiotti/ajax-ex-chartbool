@@ -30,8 +30,13 @@ $.ajax({
       var moment_data = moment(datavendita, "DD/MM/YYYY");
       var mesevendita = moment_data.format('MMMM');
       mesi[mesevendita] += ammontare;
-
     }
+    console.log(mesi);
+
+    var label_mesi = Object.keys(mesi);
+    var dati_vendite = Object.values(mesi);
+
+    disegna_grafico_vendite_mensili(label_mesi, dati_vendite)
 
 
     // GRAFICO VENDITE PER VENDITORE
@@ -95,6 +100,20 @@ function disegna_grafico_vendite_venditore(nomi, dati) {
             'text': 'Fatturato per venditore - 2017'
         }
     }
+  });
+}
+
+function disegna_grafico_vendite_mensili(mesi, dati) {
+
+  var myLineChart = new Chart($('#grafico_vendite_mensili'), {
+    'type': 'line',
+    'data': {
+      'datasets': [{
+        'data': dati,
+        'backgroundColor': ['#82D8D0', 'lightblue', '#FDC36F', 'lightgreen']
+        }],
+    'labels': mesi
+    },
   });
 }
 
