@@ -6,6 +6,36 @@ $.ajax({
   method: 'GET',
   success: function(response){
 
+    console.log(response);
+
+    // GRAFICO VENDITE ANNUALI
+
+    for (var i = 0; i < response.length; i++) {
+      var vendita = response[i];
+      var ammontare = vendita.amount;
+      var datavendita = vendita.date;
+      var moment_data = moment(datavendita, 'DD/MM/YYYY');
+      console.log(vendita);
+    }
+
+
+    // GRAFICO VENDITE PER VENDITORE
+
+    var mesi = {
+      'january': 0,
+      'February': 0,
+      'March': 0,
+      'April': 0,
+      'May': 0,
+      'June': 0,
+      'July': 0,
+      'August': 0,
+      'September': 0,
+      'October': 0,
+      'November': 0,
+      'December': 0
+    }
+
     var vendite = {};
     var totalevendite = 0;
     // ciclo i risultati e preparo un oggetto con chiavi = venditore e
@@ -25,15 +55,15 @@ $.ajax({
     }
 
     //preparo le percentuali di vendita per ogni venditore
-    console.log(vendite);
     if (totalevendite > 0) {
       for (venditore in vendite){
         var totale_vendite_venditore = vendite[venditore];
         var percentuale_vendite_venditore = (totale_vendite_venditore * 100)/totalevendite;
         vendite[venditore] = percentuale_vendite_venditore.toFixed(1);
       }
+    } else {
+      log('dati non disponibili');
     }
-    console.log(percentuale_vendite_venditore);
 
     var label_venditori = Object.keys(vendite);
     var dati_vendite_per_venditore = Object.values(vendite)
