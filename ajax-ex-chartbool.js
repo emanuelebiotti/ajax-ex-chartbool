@@ -6,23 +6,10 @@ $.ajax({
   method: 'GET',
   success: function(response){
 
-    console.log(response);
-
     // GRAFICO VENDITE ANNUALI
 
-    for (var i = 0; i < response.length; i++) {
-      var vendita = response[i];
-      var ammontare = vendita.amount;
-      var datavendita = vendita.date;
-      var moment_data = moment(datavendita, 'DD/MM/YYYY');
-      console.log(vendita);
-    }
-
-
-    // GRAFICO VENDITE PER VENDITORE
-
     var mesi = {
-      'january': 0,
+      'January': 0,
       'February': 0,
       'March': 0,
       'April': 0,
@@ -35,6 +22,20 @@ $.ajax({
       'November': 0,
       'December': 0
     }
+
+    for (var i = 0; i < response.length; i++) {
+      var vendita = response[i];
+      var ammontare = vendita.amount;
+      var datavendita = vendita.date;
+      var moment_data = moment(datavendita, "DD/MM/YYYY");
+      var mesevendita = moment_data.format('MMMM');
+      mesi[mesevendita] += ammontare;
+
+    }
+
+
+    // GRAFICO VENDITE PER VENDITORE
+
 
     var vendite = {};
     var totalevendite = 0;
