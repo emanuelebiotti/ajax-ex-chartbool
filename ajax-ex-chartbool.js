@@ -7,6 +7,9 @@ $.ajax({
   success: function(response){
 
     var vendite = {};
+    var totalevendite = 0;
+    // ciclo i risultati e preparo un oggetto con chiavi = venditore e
+    // valore = totale venduto
     for (var i = 0; i < response.length; i++){
       var vendita = response[i];
       var venditore = vendita.salesman;
@@ -18,7 +21,17 @@ $.ajax({
       } else {
         vendite[venditore] += importo;
       }
+      totalevendite += importo;
     }
+
+    //preparo le percentuali di vendita per ogni venditore
+    console.log(vendite);
+    for (venditore in vendite){
+      var totale_vendite_venditore = vendite[venditore];
+      var percentuale_vendite_venditore = (totale_vendite_venditore * 100)/totalevendite;
+      vendite[venditore] = percentuale_vendite_venditore.toFixed(1);
+    }
+    console.log(percentuale_vendite_venditore);
 
     var label_venditori = Object.keys(vendite);
     var dati_vendite_per_venditore = Object.values(vendite)
