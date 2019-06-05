@@ -26,10 +26,12 @@ $.ajax({
 
     //preparo le percentuali di vendita per ogni venditore
     console.log(vendite);
-    for (venditore in vendite){
-      var totale_vendite_venditore = vendite[venditore];
-      var percentuale_vendite_venditore = (totale_vendite_venditore * 100)/totalevendite;
-      vendite[venditore] = percentuale_vendite_venditore.toFixed(1);
+    if (totalevendite > 0) {
+      for (venditore in vendite){
+        var totale_vendite_venditore = vendite[venditore];
+        var percentuale_vendite_venditore = (totale_vendite_venditore * 100)/totalevendite;
+        vendite[venditore] = percentuale_vendite_venditore.toFixed(1);
+      }
     }
     console.log(percentuale_vendite_venditore);
 
