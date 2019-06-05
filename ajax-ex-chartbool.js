@@ -5,7 +5,6 @@ $.ajax({
   url:'http://157.230.17.132:4003/sales',
   method: 'GET',
   success: function(response){
-    // console.log(response);
 
     var vendite = {};
     for (var i = 0; i < response.length; i++){
@@ -36,15 +35,15 @@ $.ajax({
 function disegna_grafico_vendite_venditore(nomi, dati) {
 
   var myPieChart = new Chart($('#grafico_venditori'), {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: dati,
+      'type': 'doughnut',
+      'data': {
+        'datasets': [{
+          'data': dati,
+          'backgroundColor': ['#82D8D0', 'lightblue', '#FDC36F', 'lightgreen']
           }],
-       labels: nomi
+       'labels': nomi
       },
   });
-
 }
 
 });
