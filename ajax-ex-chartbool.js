@@ -22,7 +22,7 @@ function popola_select(dati_grezzi){
     var nome_venditore = dati_grezzi[i].salesman;
     if (!nomi_venditori.includes(nome_venditore)){
       nomi_venditori.push(nome_venditore);
-      $('#nomi_venditori').append('<option>' + nomi_venditori[i] + '</option>')
+      $('#nomi_venditori').append('<option value= "'+ nomi_venditori[i] + '">' + nomi_venditori[i] + '</option>')
     }
   }
 }
