@@ -5,7 +5,7 @@ $.ajax({
   url:'http://157.230.17.132:4003/sales',
   method: 'GET',
   success: function(response){
-    console.log(response);
+    // console.log(response);
     popola_select(response);
     organizza_dati_vendite_annuali(response);
     organizza_dati_vendite_venditore(response);
@@ -18,14 +18,35 @@ $.ajax({
 function popola_select(dati_grezzi){
   var nomi_venditori = [];
   //ciclo tutti i risultati e cerco i nomi dei venditori
+    $('#nomi_venditori').append('<option>seleziona un venditore</option>');
   for (var i = 0; i < dati_grezzi.length; i++){
     var nome_venditore = dati_grezzi[i].salesman;
     if (!nomi_venditori.includes(nome_venditore)){
       nomi_venditori.push(nome_venditore);
-      $('#nomi_venditori').append('<option value= "'+ nomi_venditori[i] + '">' + nomi_venditori[i] + '</option>')
+      $('#nomi_venditori').append('<option value= "'+ nome_venditore + '">' + nome_venditore + '</option>');
     }
   }
-}
+
+  var mesi = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+  $('#mese_vendita').append('<option>seleziona un mese</option>');
+  for (var j = 0; j < mesi.length; j++) {
+    $('#mese_vendita').append('<option value= "'+ mesi[j] + '">' + mesi[j] + '</option>');
+  };
+ }
 
 function organizza_dati_vendite_venditore(dati_grezzi) {
 
