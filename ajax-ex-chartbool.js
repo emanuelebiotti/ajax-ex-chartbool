@@ -5,6 +5,7 @@ $.ajax({
   url:'http://157.230.17.132:4003/sales',
   method: 'GET',
   success: function(response){
+    popola_select(response);
     organizza_dati_vendite_annuali(response);
     organizza_dati_vendite_venditore(response);
   },
@@ -12,6 +13,23 @@ $.ajax({
     alert('error');
   }
 });
+
+function popola_select(dati_grezzi){
+  var venditori = []
+  //ciclo tutti i risultati e cerco i nomi dei venditori
+  for (var i = 0; i < dati_grezzi.length; i++){
+    var vendita = dati_grezzi[i];
+    var venditore = vendita.salesman;
+
+    if (!venditori.includes(venditore)){
+      venditori.push(venditore);
+      $('#nomi_venditori').append('<option>' + venditore + '</option>')
+
+    }
+  }
+
+}
+
 
 function organizza_dati_vendite_venditore(dati_grezzi) {
 
