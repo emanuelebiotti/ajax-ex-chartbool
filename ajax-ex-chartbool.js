@@ -1,5 +1,26 @@
 $(document).ready(function(){
 
+  // vado a intercettare il click sul pulsante inserisci per inserire
+  // i dati selezionati nelle select e immessi nell'input
+
+  $('#inserisci').click(function(){
+    //vado a leggere le selezioni dell'utente
+    var mesevendita = $('#mese_vendita').val();
+    var venditore = $('#nomi_venditori').val();
+    var nuovavendita = $('#nuovavendita').val()
+    $('#mese_vendita').children().first().attr('selected', 'selected');
+    $('#nomi_venditori').children().first().attr('selected', 'selected');
+    $('#nuovavendita').val('')
+
+    // controllo cosa ha inserito l'utente
+    var validatore = valida_dati_vendita(mesevendita, venditore, nuovavendita);
+    if (validatore) {
+      alert('ok');
+    } else {
+      alert('compila tutti i dati')
+    }
+  });
+
 
 $.ajax({
   url:'http://157.230.17.132:4003/sales',
@@ -15,10 +36,17 @@ $.ajax({
   }
 });
 
+function valida_dati_vendita(mese, nome, somma) {
+  if (mese.length == 0 || nome.length == 0 || isNaN(somma) || somma <= 0 || somma.length == 0){
+    return false;
+  }
+  return true;
+}
+
 function popola_select(dati_grezzi){
   var nomi_venditori = [];
   //ciclo tutti i risultati e cerco i nomi dei venditori
-    $('#nomi_venditori').append('<option>seleziona un venditore</option>');
+    $('#nomi_venditori').append('<option value ="">seleziona un venditore</option>');
   for (var i = 0; i < dati_grezzi.length; i++){
     var nome_venditore = dati_grezzi[i].salesman;
     if (!nomi_venditori.includes(nome_venditore)){
