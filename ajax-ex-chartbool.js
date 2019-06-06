@@ -121,6 +121,12 @@ function disegna_grafico_vendite_mensili(mesi, dati) {
         }],
     'labels': mesi
     },
+    'options': {
+      'title': {
+          'display': true,
+          'text': 'Fatturato per mese - 2017'
+      }
+  }
   });
 }
 

@@ -2,8 +2,23 @@
   box-sizing: border-box;
 }
 .container {
-  width:500px;
-  height:700px;
+  width:800px;
+  height:auto;
   margin: auto;
   border:1px solid black;
+}
+.controlli {
+  width:100%;
+  display:flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom:50px;
+}
+select {
+  width:100px;
+  height:20px;
+  margin-right:20px;
+}
+input {
+  width:150px;
 }
