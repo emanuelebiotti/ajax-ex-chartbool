@@ -15,7 +15,26 @@ $(document).ready(function(){
     // controllo cosa ha inserito l'utente
     var validatore = valida_dati_vendita(mesevendita, venditore, nuovavendita);
     if (validatore) {
-      alert('ok');
+      //preparo una data con un formato corretto
+      var data_vendita = moment('01-' + mesevendita + '-2017', 'DD-MMMM-YYYY');
+      data_vendita = data_vendita.format('DD/MM/YYYY');
+      console.log(data_vendita);
+
+      // se tutti i dati sono validi li invio con una POST
+      $.ajax({
+        url:'http://157.230.17.132:4003/sales',
+        method: 'POST',
+        success: function(response){
+          "salesman": venditore,
+          "amount": nuovavendita,
+          "date": data_vendita
+
+        },
+        error: function(){
+          alert('error');
+        }
+      });
+
     } else {
       alert('compila tutti i dati')
     }
