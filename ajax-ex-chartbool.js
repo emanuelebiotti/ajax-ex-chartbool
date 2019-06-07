@@ -192,7 +192,6 @@ function organizza_dati_vendite_annuali(dati_grezzi) {
 }
 
 
-
 function disegna_grafico_vendite_venditore(nomi, dati) {
 
   var myPieChart = new Chart($('#grafico_venditori'), {
