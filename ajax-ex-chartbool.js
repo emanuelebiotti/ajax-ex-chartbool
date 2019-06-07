@@ -9,7 +9,7 @@ $(document).ready(function(){
     //vado a leggere le selezioni dell'utente
     var mesevendita = $('#mese_vendita').val();
     var venditore = $('#nomi_venditori').val();
-    var nuovavendita = $('#nuovavendita').val()
+    var nuovavendita = parseInt($('#nuovavendita').val());
     $('#mese_vendita').children().first().attr('selected', 'selected');
     $('#nomi_venditori').children().first().attr('selected', 'selected');
     $('#nuovavendita').val('')
@@ -26,11 +26,12 @@ $(document).ready(function(){
       $.ajax({
         url:'http://157.230.17.132:4003/sales',
         method: 'POST',
-        data: {
-          "salesman": venditore,
-          "amount": nuovavendita,
-          "date": data_vendita
-        },
+        contentType: 'application/json',
+        data: JSON.stringify({
+         "salesman": venditore,
+         "amount": nuovavendita,
+         "date": data_vendita
+       }),
         success: function(response){
           disegna_grafici();
         },
