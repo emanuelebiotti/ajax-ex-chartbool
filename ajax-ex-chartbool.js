@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  disegna_grafici();
+
   // vado a intercettare il click sul pulsante inserisci per inserire
   // i dati selezionati nelle select e immessi nell'input
 
@@ -30,7 +32,7 @@ $(document).ready(function(){
           "date": data_vendita
         },
         success: function(response){
-          console.log(response);
+          disegna_grafici();
         },
         error: function(){
           alert('error');
@@ -43,19 +45,35 @@ $(document).ready(function(){
   });
 
 
-$.ajax({
-  url:'http://157.230.17.132:4003/sales',
-  method: 'GET',
-  success: function(response){
-    // console.log(response);
-    popola_select(response);
-    organizza_dati_vendite_annuali(response);
-    organizza_dati_vendite_venditore(response);
-  },
-  error: function(){
-    alert('error');
-  }
-});
+// $.ajax({
+//   url:'http://157.230.17.132:4003/sales',
+//   method: 'GET',
+//   success: function(response){
+//     // console.log(response);
+//     popola_select(response);
+//     organizza_dati_vendite_annuali(response);
+//     organizza_dati_vendite_venditore(response);
+//   },
+//   error: function(){
+//     alert('error');
+//   }
+// });
+
+function disegna_grafici(){
+  $.ajax({
+    url:'http://157.230.17.132:4003/sales',
+    method: 'GET',
+    success: function(response){
+      // console.log(response);
+      popola_select(response);
+      organizza_dati_vendite_annuali(response);
+      organizza_dati_vendite_venditore(response);
+    },
+    error: function(){
+      alert('error');
+    }
+  });
+}
 
 function valida_dati_vendita(mese, nome, somma) {
   if (mese.length == 0 || nome.length == 0 || isNaN(somma) || somma <= 0 || somma.length == 0){
