@@ -24,11 +24,13 @@ $(document).ready(function(){
       $.ajax({
         url:'http://157.230.17.132:4003/sales',
         method: 'POST',
-        success: function(response){
+        data: {
           "salesman": venditore,
           "amount": nuovavendita,
           "date": data_vendita
-
+        },
+        success: function(response){
+          console.log(response);
         },
         error: function(){
           alert('error');
